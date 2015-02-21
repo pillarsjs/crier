@@ -1,0 +1,59 @@
+{
+  "name": "crier",
+  "description": "Log dispatcher , multi store, tree grouping, formatter, meta handling, error handling.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Javier Gallego Martín",
+    "email": "bifuer@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Chelo Quilón Gomez",
+      "email": "cheloq@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/bifuer/crier",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bifuer/crier"
+  },
+  "bugs": {
+    "url": "https://github.com/bifuer/crier/issues",
+    "email" : "cheloq@gmail.com"
+  },
+  "keywords": [
+    "log",
+    "logs",
+    "logger",
+    "log handling",
+    "log dispatcher",
+    "console",
+    "async errors",
+    "node",
+    "js",
+    "javascript"
+  ],
+  "dependencies": {
+    "procedure": "*",
+    "objectarray": "*",
+    "date.format": "*",
+    "json.decycled": "*",
+    "colors": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "unit.js": "*"
+  },
+  "main": "./index.js",
+  "scripts":{
+    "test": "mocha test/"
+  },
+  "preferGlobal": false,
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
+  "readmeFilename": "README.md",
+  "license": "MIT"
+}
