@@ -54,21 +54,23 @@ function Crier(parent,id){
       msg = msg || '';
       meta = meta || {};
 
-      var stores = [];
-      for(var i=0,l=Crier.rules.length;i<l;i++){
-        Crier.rules[i].rule(stores,location,lvl,msg,meta);
+      var stores = ['console'];
+      for(var i=0,l=this.rules.length;i<l;i++){
+        this.rules[i].rule(stores,location,lvl,msg,meta);
       }
-      if(stores.length===0){stores=['console'];}
 
       var procedure = new Procedure();
       for(i=0,l=stores.length;i<l;i++){
-        var store = Crier.stores.get(stores[i]);
+        var store = this.stores.get(stores[i]);
         if(store){
           procedure.add(store.handler.bind(store),location,lvl,msg,meta);
         }
       }
-      procedure.race().launch(function(error){
+      procedure.race().launch(function(errors){
         var args = Array.prototype.slice.call(arguments);
+        if(errors && Crier.errors){
+          Crier.errors.apply(this,args);
+        }
         if(callback){
           callback.apply(this,args);
         }
@@ -93,19 +95,19 @@ function Crier(parent,id){
     this.$compose([],'warn',msg,meta,callback);
   };
 
-  
   Crier.console = {
     id: 'console',
     language: 'en',
     colors: {log:'cyan',info:'green',alert:'yellow',error:'bgRed',warn:'bgYellow'},
     format: function(text,meta,lang){return text;},
-    handler: function(groups,lvl,msg,meta,callback){
-      var node = groups.join('.')+'.'+msg;
-      var format = this.format(node,meta,this.language);
-      var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss}',true).grey;
+    handler: function(location,lvl,msg,meta,callback){
+      var node = location.join('.')+'.'+msg;
+      var format = Crier.console.format(node,meta,Crier.console.language);
+      var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} ',true).grey;
       var output = timestamp;
+      if(format)
       if(format===node){
-        output += (' '+lvl.toUpperCase()+'.'+groups.join('.')+': ')[(this.colors[lvl]?this.colors[lvl]:'white')];
+        output += (lvl.toUpperCase()+'.'+location.join('.')+': ')[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')];
         output += msg;
         output += '\n'+JSON.decycled(meta).replace(/(\\n|\\r)/g,'\n').replace(/\\t/g,'\t');
         if(meta.error && meta.error.stack){
@@ -119,5 +121,5 @@ function Crier(parent,id){
       callback(undefined,output);
     }
   };
-  Crier.rules = new ObjectArray();
-  Crier.stores = new ObjectArray(Crier.console);
+  Crier.prototype.rules = new ObjectArray();
+  Crier.prototype.stores = new ObjectArray(Crier.console);
