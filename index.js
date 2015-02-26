@@ -63,7 +63,7 @@ function Crier(parent,id){
       for(i=0,l=stores.length;i<l;i++){
         var store = this.stores.get(stores[i]);
         if(store){
-          procedure.add(store.handler.bind(store),location,lvl,msg,meta);
+          procedure.add('crier.stores.'+store.id,store.handler.bind(store),location,lvl,msg,meta);
         }
       }
       procedure.race().launch(function(errors){
@@ -78,7 +78,9 @@ function Crier(parent,id){
     }
   };
 
-
+  Crier.prototype.debug = function(msg,meta,callback){
+    this.$compose([],'debug',msg,meta,callback);
+  };
   Crier.prototype.log = function(msg,meta,callback){
     this.$compose([],'log',msg,meta,callback);
   };
@@ -95,6 +97,10 @@ function Crier(parent,id){
     this.$compose([],'warn',msg,meta,callback);
   };
 
+  Crier.errors = function(errors){
+    console.error.apply(null,errors);
+  };
+
   Crier.console = {
     id: 'console',
     language: 'en',
@@ -109,9 +115,12 @@ function Crier(parent,id){
       if(format===node){
         output += (lvl.toUpperCase()+'.'+location.join('.')+': ')[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')];
         output += msg;
-        output += '\n'+JSON.decycled(meta).replace(/(\\n|\\r)/g,'\n').replace(/\\t/g,'\t');
-        if(meta.error && meta.error.stack){
-          output += ('\n\n'+meta.error.stack+'\n').bgRed;
+        meta = JSON.decycled(meta,false,3,'  ');
+        if(meta){
+          output += '\n'+meta.replace(/(\\n|\\r)/g,'\n').replace(/\\t/g,'\t');
+          if(meta.error && meta.error.stack){
+            output += ('\n\n'+meta.error.stack+'\n').bgRed;
+          }
         }
         output += '\n';
       } else {
