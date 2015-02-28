@@ -110,21 +110,19 @@ function Crier(parent,id){
       var node = location.join('.')+'.'+msg;
       var format = Crier.console.format(node,meta,Crier.console.language);
       var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} ',true).grey;
-      var output = timestamp;
+      var output = "·"[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')]+' '+timestamp;
       if(format)
       if(format===node){
         output += (lvl.toUpperCase()+'.'+location.join('.')+': ')[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')];
         output += msg;
-        meta = JSON.decycled(meta,false,3,'  ');
         if(meta){
-          output += '\n'+meta.replace(/(\\n|\\r)/g,'\n').replace(/\\t/g,'\t');
-          if(meta.error && meta.error.stack){
-            output += ('\n\n'+meta.error.stack+'\n').bgRed;
-          }
+          output += '\n'+JSON.decycled(meta,false,3,'  ').grey;
         }
-        output += '\n';
       } else {
         output += format;
+      }
+      if(meta && meta.error && meta.error.stack){
+        output += ('\n\n'+meta.error.stack+'\n').bgRed;
       }
       console.log(output);
       callback(undefined,output);
