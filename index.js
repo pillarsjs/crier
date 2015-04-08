@@ -104,13 +104,13 @@ function Crier(parent,id){
   Crier.console = {
     id: 'console',
     language: 'en',
-    colors: {log:'cyan',info:'green',alert:'yellow',error:'bgRed',warn:'bgYellow'},
+    colors: {log:'cyan',info:'green',alert:'yellow',error:'red',warn:'magenta'},
     format: function(text,meta,lang){return text;},
     handler: function(location,lvl,msg,meta,callback){
       var node = location.join('.')+'.'+msg;
       var format = Crier.console.format(node,meta,Crier.console.language);
       var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} ',true).grey;
-      var output = "·"[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')]+' '+timestamp;
+      var output = "\r▶"[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')]+' '+timestamp;
       if(format)
       if(format===node){
         output += (lvl.toUpperCase()+'.'+location.join('.')+': ')[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')];
