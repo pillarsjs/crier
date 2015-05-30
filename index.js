@@ -110,7 +110,7 @@ function Crier(parent,id){
       var node = location.join('.')+'.'+msg;
       var format = Crier.console.format(node,meta,Crier.console.language);
       var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} ',true).grey;
-      var output = "\r▶"[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')]+' '+timestamp;
+      var output = '\r'+timestamp;
       if(format)
       if(format===node){
         output += (lvl.toUpperCase()+'.'+location.join('.')+': ')[(Crier.console.colors[lvl]?Crier.console.colors[lvl]:'white')];
