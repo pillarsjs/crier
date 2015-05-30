@@ -1,7 +1,7 @@
 {
   "name": "crier",
   "description": "Log dispatcher , multi store, tree grouping, formatter, meta handling, error handling.",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": {
     "name": "Javier Gallego Martín",
     "email": "bifuer@gmail.com"
