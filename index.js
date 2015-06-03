@@ -103,7 +103,7 @@ function Crier(parent,id){
 
   Crier.console = {
     id: 'console',
-    language: 'en',
+    language: undefined,
     colors: {log:'cyan',info:'green',alert:'yellow',error:'red',warn:'magenta'},
     format: function(text,meta,lang){return text;},
     handler: function(location,lvl,msg,meta,callback){
