@@ -7,7 +7,13 @@ var colors = require('colors');
 require('json.decycled');
 require('date.format');
 
-module.exports = new Crier();
+global.modulesCache = global.modulesCache || {};
+if(global.modulesCache.crier){
+  module.exports = global.modulesCache.crier;
+  return;
+}
+
+module.exports = global.modulesCache.crier = new Crier();
 function Crier(parent,id){
   this.id = id;
   this.parent = parent;
