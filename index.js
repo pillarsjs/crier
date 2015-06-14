@@ -115,7 +115,7 @@ function Crier(parent,id){
     handler: function(location,lvl,msg,meta,callback){
       var node = location.join('.')+'.'+msg;
       var format = Crier.console.format(node,meta,Crier.console.language);
-      var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} ',true).grey;
+      var timestamp = (new Date()).format('{YYYY}/{MM}/{DD} {hh}:{mm}:{ss} UTC ',true).grey;
       var output = '\r'+timestamp;
       if(format)
       if(format===node){
