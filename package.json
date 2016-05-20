@@ -12,13 +12,13 @@
       "email": "cheloq@gmail.com"
     }
   ],
-  "homepage": "https://github.com/bifuer/crier",
+  "homepage": "https://github.com/pillarsjs/crier",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bifuer/crier"
+    "url": "git://github.com/pillarsjs/crier"
   },
   "bugs": {
-    "url": "https://github.com/bifuer/crier/issues",
+    "url": "https://github.com/pillarsjs/crier/issues",
     "email" : "cheloq@gmail.com"
   },
   "keywords": [
