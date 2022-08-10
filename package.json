@@ -3,8 +3,7 @@
   "description": "Log dispatcher , multi store, tree grouping, formatter, meta handling, error handling.",
   "version": "0.4.6",
   "author": {
-    "name": "Javier Gallego Martín",
-    "email": "bifuer@gmail.com"
+    "name": "Bifuer",
   },
   "contributors": [
     {
